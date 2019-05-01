@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>CONTASS</title>
+</h:head>
+
+
+
+	<h:form>
+		<p:panelGrid columns="1">
+			<p:commandButton value="Cadastrar Tarefa" style="height: 50px; width:200px" action="#{tarefaManagedBean.telaCadastro}"/>
+		</p:panelGrid>
+		<p:panelGrid columns="1">
+			<p:commandButton value="Buscar Tarefas" style="height: 50px; width:200px" action="listarTarefas.xhtml?faces-redirect=true"/>
+		</p:panelGrid>
+
+	</h:form>
+</html>

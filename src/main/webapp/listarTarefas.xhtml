@@ -1,0 +1,92 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>C O N T A S S</title>
+</h:head>
+
+
+
+	<h:form id="formTarefa" >
+
+			<h:panelGrid columns="4">
+				<p:outputLabel value="Id da tarefa a ser pesquisada: "/>
+				<p:inputText value="#{tarefaManagedBean.idTarefaPesquisada}" id="idBusca">
+					<p:keyFilter regEx="/[\d\-]/"/>
+				</p:inputText>
+				<p:commandButton value="Buscar Por Id" actionListener="#{tarefaManagedBean.buscarPorId}" update="tableTarefas, idBusca"/>
+				<p:commandButton value="Buscar Todas" actionListener="#{tarefaManagedBean.listarTarefas}" update=":formTarefa:tableTarefas"/>
+			</h:panelGrid>
+
+			<p:dataTable id="tableTarefas" var="tarefa" value="#{tarefaManagedBean.listaTarefas}" editable="true" selection="#{tarefaManagedBean.tarefaDTO}"  >
+
+
+	        <p:ajax event="rowEdit" listener="#{tarefaManagedBean.editarTarefa}" update=":formTarefa:tableTarefas"/>
+
+			<p:column headerText="ID">
+				<h:outputText value="#{tarefa.id}"/>
+			</p:column>
+
+			<p:column headerText="DATA">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{tarefa.data}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
+					</f:facet>
+					<f:facet name="input">
+						<p:calendar value="#{tarefa.data}" pattern="dd/MM/yyyy"/>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+
+			<p:column headerText="DESCRIÇÃO">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{tarefa.descricao}"/>
+					</f:facet>
+					<f:facet name="input">
+						<p:inputTextarea maxlength="100" rows="3" cols="30" value="#{tarefa.descricao}"/>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+
+			<p:column headerText="USUÁRIO">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{tarefa.usuario}"/>
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="usuarioTarefa" maxlength="50" value="#{tarefa.usuario}"/>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			 <p:column style="width:35px">
+	            <p:rowEditor/>
+	        </p:column>
+
+       		<p:column>
+				<p:commandButton icon="ui-icon-closethick" action="#{tarefaManagedBean.removerTarefa}" update="formTarefa:tableTarefas">
+					<p:confirm message="Deseja Excluir o elemento selecionado?" header="Confirmação" icon="pi pi-exclamation-triangle"/>
+				</p:commandButton>
+			</p:column>
+
+		</p:dataTable>
+
+
+		<p:confirmDialog showEffect="fade" hideEffect="fade" global="true">
+			<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" update="formTarefa:tableTarefas" />
+			<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no"/>
+		</p:confirmDialog>
+
+	<br/><br/>
+
+			<p:commandButton value="Menu"  action="#{tarefaManagedBean.redirecionarMenu}"/>
+
+	</h:form>
+</html>

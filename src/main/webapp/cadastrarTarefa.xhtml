@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title> C O N T A S S </title>
+</h:head>
+
+<script type="text/javascript">
+
+</script>
+
+
+
+	<h:form id="formTarefa">
+
+				<p:panel header="CADASTRO TAREFA">
+					<h:panelGrid columns="2">
+						<p:outputLabel for="dataTarefa" value="Data:"/>
+						<p:calendar id="dataTarefa" value="#{tarefaManagedBean.tarefaDTO.data}" pattern="dd/MM/yyyy"/>
+					</h:panelGrid>
+
+					<h:panelGrid columns="2">
+						<p:outputLabel for="descricaoTarefa" value="Descrição:"/>
+						<p:inputTextarea id="descricaoTarefa" maxlength="100" rows="3" cols="30" value="#{tarefaManagedBean.tarefaDTO.descricao}"/>
+					</h:panelGrid>
+
+					<h:panelGrid columns="2">
+						<p:outputLabel for="usuarioTarefa" value="Usuário"/>
+						<p:inputText id="usuarioTarefa" maxlength="50" value="#{tarefaManagedBean.tarefaDTO.usuario}"/>
+					</h:panelGrid>
+
+					<br/>
+
+				</p:panel>
+
+					<h:panelGrid columns="2">
+						<p:commandButton value="Voltar" action="menu.xhtml?faces-redirect=true"/>
+						<p:commandButton value="Cadastrar" action="#{tarefaManagedBean.cadastrarTarefa}" update="formTarefa"/>
+					</h:panelGrid>
+
+	</h:form>
+</html>
